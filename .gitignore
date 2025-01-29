@@ -1,4 +1,4 @@
 .env
-__pycache___/
+__pycache__/
 poetry.lock
 dist/
