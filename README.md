@@ -6,7 +6,7 @@
 pipx install bonchcli
 ```
 
-> Это херня пока работает только с Селениумом, так что придётся поставить его, пока я не решил тикет [#5](https://github.com/KarimullinArthur/BonchAPI/issues/5])
+> Это херня пока работает только с Селениумом, так что придётся поставить его, пока я не решил тикет [#5](https://github.com/KarimullinArthur/BonchAPI/issues/5)
 
 ### Selemium driver
 Если сидишь на Харче можешь бахнуть
