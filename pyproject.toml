@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "bonchcli"
-version = "0.0.1"
+version = "0.0.2"
 description = "lk.sut.ru console client"
 authors = ["Karimullin Arthur <KarimullinArthur@disroot.org>"]
 readme = "README.md"
