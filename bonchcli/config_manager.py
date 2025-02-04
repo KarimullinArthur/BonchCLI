@@ -61,7 +61,7 @@ class ConfigManager:
         return True
 
     def create_config_file(self):
-        pathlib.Path.mkdir(self.path_config_dir, mode=400, exist_ok=True)
+        pathlib.Path.mkdir(self.path_config_dir, mode=0o700, exist_ok=True)
         pathlib.Path.touch(self.path_config_file, mode=400, exist_ok=True)
 
     def is_config_exists(self) -> bool:
