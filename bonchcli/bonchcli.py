@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+
 import asyncio
 import argparse
 from getpass import getpass
@@ -29,10 +30,11 @@ async def main():
 
     parser = argparse.ArgumentParser(
                         prog="bonchcli",
-                        description='What the program does',
-                        epilog='Text at the bottom of help')
+                        epilog="Example: bonchcli -3"
+                        )
 
-    parser.add_argument('week_offset', nargs="?", type=int, default=0)
+    parser.add_argument('week_offset', nargs="?", type=int, default=0,
+                        help="a positive or negative number")
     args = parser.parse_args()
 
     api = BonchAPI()
@@ -70,6 +72,7 @@ async def main():
     rsp = await api.get_timetable(week_offset=args.week_offset)
     
     formatting.render_timetable(rsp)
+
 
 def sync_main():
     """This func need for build pipx applicaion as entry point"""
