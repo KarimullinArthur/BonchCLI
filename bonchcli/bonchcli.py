@@ -7,7 +7,6 @@ from getpass import getpass
 from bonchapi import BonchAPI
 from bonchapi.bonchapi import AuthError
 
-from .get_token_from_browser import Brow
 from .config_manager import cm, Config
 from . import formatting
 
@@ -38,37 +37,7 @@ async def main():
     args = parser.parse_args()
 
     api = BonchAPI()
-
     await api.login(config.mail, config.password)
-
-    api.cookies = {}
-
-    def write_brow_token():
-        browser = Brow(config)
-        token = browser.get_token()
-        setattr(api, "cookies", {}) 
-        with open("/tmp/bonch-token", "w") as file:
-            file.write(token)
-        api.cookies["miden"] = token
-
-    def read_token_from_cache():
-        with open("/tmp/bonch-token", "r") as file:
-            token = file.readline()
-            api.cookies["miden"] = token
-
-    write_brow_token()
-
-    try:
-        read_token_from_cache()
-    except FileNotFoundError:
-        write_brow_token()
-
-    try:
-        rsp = await api.get_timetable(week_offset=args.week_offset)
-    except AuthError:
-        write_brow_token()
-
-    
     rsp = await api.get_timetable(week_offset=args.week_offset)
     
     formatting.render_timetable(rsp)
