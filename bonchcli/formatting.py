@@ -9,6 +9,8 @@ class bcolors:
     BOLD = '\033[1m'
     YELLOW_SELECT = '\033[43m'
     UNDERLINE = '\033[4m'
+    WHITE = '\33[37m'
+    VIOLET = '\33[35m'
 
 
 def render_timetable(rsp):
@@ -65,11 +67,11 @@ def render_timetable(rsp):
                 elif lesson.lesson_type in ("Экзамен", "Зачет"):
                         color = bcolors.FAIL
                 else:
-                    color = "\x1b[94;5m"
+                    color = bcolors.WHITE
                 print("│ ", color, arg, bcolors.ENDC, sep="")
 
             elif arg == lesson.teacher:
-                print("│ ", "\x1b[77;1m", arg, "\x1b[0m", sep="")
+                print("│ ", bcolors.VIOLET, arg, bcolors.ENDC, sep="")
             else:
                 print('│', arg)
 
