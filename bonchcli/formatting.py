@@ -1,16 +1,18 @@
-class bcolors:
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKCYAN = '\033[96m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    YELLOW_SELECT = '\033[43m'
-    UNDERLINE = '\033[4m'
-    WHITE = '\33[37m'
-    VIOLET = '\33[35m'
+class Colors:
+    DATE = "\x1b[93;1m"
+    DAY = "\x1b[93;1m"
+    NUMBER = "\x1b[93;41m"
+    TIME = "\x1b[93;5m"
+    SUBJECTSTR = ""
+    LECTURE = "\x1b[94;5m"
+    LAB = "\x1b[91;5m"
+    PRACTICAL_JOB = "\x1b[92;5m"
+    CONSULTATION = "\x1b[95;5m"
+    EXAM = "\x1b[91;5m"
+    LOCATION = ""
+    TEACHER = "\x1b[77;1m"
+    DEFAULT_LESSON_TYPE = ""
+    RESET = "\x1b[0m"
 
 
 def render_timetable(rsp):
@@ -18,6 +20,7 @@ def render_timetable(rsp):
     state = True
     firstly = True
     count = 0
+
     for lesson in rsp:
         try:
             if week[-1] != lesson.date:
@@ -38,14 +41,14 @@ def render_timetable(rsp):
 
         for arg in lesson:
             if arg == lesson.date and state:
-                print("\t", bcolors.OKCYAN, arg, bcolors.ENDC)
+                print("\t", Colors.DATE, arg, Colors.RESET)
             elif arg == lesson.day and state:
                 print("\t", arg, "\n")
             elif arg in (lesson.date, lesson.day) and state == False:
                 pass
             elif arg == lesson.number:
                 if arg is not None:
-                    print(bcolors.YELLOW_SELECT, arg, bcolors.ENDC, end='')
+                    print(Colors.NUMBER, arg, Colors.RESET, end='')
                 else:
                     print("╔", "─", sep="", end='')
             elif arg == lesson.time:
@@ -53,25 +56,25 @@ def render_timetable(rsp):
                     end = "─"*12
                 else:
                     end = ''
-                print("─"*4, bcolors.WARNING, arg, bcolors.ENDC, "─"*4, end, sep="")
+                print("─"*4, Colors.TIME, arg, Colors.RESET, "─"*4, end, sep="")
 
             elif arg == lesson.lesson_type:
                 if lesson.lesson_type == "Лекция":
-                        color = bcolors.OKCYAN
+                        color = Colors.LECTURE
                 elif lesson.lesson_type == "Практические занятия":
-                        color = bcolors.OKCYAN
+                        color = Colors.PRACTICAL_JOB
                 elif lesson.lesson_type == "Лабораторная работа":
-                        color = bcolors.WARNING
+                        color = Colors.LAB
                 elif lesson.lesson_type == "Консультация":
-                        color = bcolors.WARNING
+                        color = Colors.CONSULTATION
                 elif lesson.lesson_type in ("Экзамен", "Зачет"):
-                        color = bcolors.FAIL
+                        color = Colors.EXAM
                 else:
-                    color = bcolors.WHITE
-                print("│ ", color, arg, bcolors.ENDC, sep="")
+                    color = Colors.DEFAULT_LESSON_TYPE
+                print("│ ", color, arg, Colors.RESET, sep="")
 
             elif arg == lesson.teacher:
-                print("│ ", bcolors.VIOLET, arg, bcolors.ENDC, sep="")
+                print("│ ", Colors.TEACHER, arg, Colors.RESET, sep="")
             else:
                 print('│', arg)
 
