@@ -12,7 +12,7 @@ packages = [
 [tool.poetry.dependencies]
 python = "^3.12"
 selenium = "^4.28.0"
-bonchapi = "0.0.6"
+bonchapi = "0.0.7"
 tomlkit = "^0.13.2"
 
 [tool.poetry.scripts]
